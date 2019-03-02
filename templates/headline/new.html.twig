@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form(form) }}
+
+    <p>Title: {{ headline.title }}</p>
+    <p>Web Node: {{ node }}</p>
+    <p>Web Host: {{ host }}</p>
+    <p>Headline URI: {{ headline.host }}/{{ slugResponse.slug }}</p>
+    <p>Slugify Node: {{ slugResponse.node }}</p>
+    <p>Slugify Host: {{ slugResponse.host }}</p>
+{% endblock %}

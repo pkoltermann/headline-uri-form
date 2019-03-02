@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:18.03
+    working_directory: /data
+    steps:
+      - checkout
+      # ... steps for building/testing app ...
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      # build and push Docker image
+      - run:
+          command: |
+            docker build -t pkoltermann/headline-uri-form:latest .
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push pkoltermann/headline-uri-form:latest
+workflows:
+  version: 2
+  build_and_push:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+
