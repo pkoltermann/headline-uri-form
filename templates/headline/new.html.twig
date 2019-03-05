@@ -1,11 +1,38 @@
 {% extends 'base.html.twig' %}
+{% set url = 'https://' ~ headline.host ~ '/' ~ slugResponse.slug %}
+{% block stylesheets %}
+<style type="text/css">
+    table, tr, td {
+        border: solid 1px black;
+        border-collapse: collapse;
+    }
+ </style>
+{% endblock %}
 {% block body %}
     {{ form(form) }}
 
+    <h4>Input Data:</h4>
     <p>Title: {{ headline.title }}</p>
-    <p>Web Node: {{ node }}</p>
-    <p>Web Host: {{ host }}</p>
-    <p>Headline URI: {{ headline.host }}/{{ slugResponse.slug }}</p>
-    <p>Slugify Node: {{ slugResponse.node }}</p>
-    <p>Slugify Host: {{ slugResponse.host }}</p>
+    <hr/>
+    <h4>Output:</h4>
+    <p>Headline URI: <a href="{{ url }}">{{ url }}</a></p>
+    </hr>
+    <h4>Metadata:</h4>
+    <table>
+        <tr>
+            <td>Web Node</td>
+            <td>{{ node }}</td>
+        </tr>
+        <tr>
+            <td>Web Host</td>
+            <td>{{ host }}</td>
+        </tr>
+        <tr>
+            <td>Slugify Node</td>
+            <td>{{ slugResponse.node }}</td>
+        </tr>
+        <tr><td>Slugify Host</td>
+            <td>{{ slugResponse.host }}</td>
+        </tr>
+    </table>
 {% endblock %}
